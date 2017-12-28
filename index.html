@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
   <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
   <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <style>
+  .inline {
+    display: flex;
+    flex-direction: row;
+  }
+  .inline > li {
+    flex: 0 0 auto;
+    margin-right: 2rem;
+  }
+  </style>
   <script src="//unpkg.com/vue@2.5.13/dist/vue.min.js"></script>
   <title>str2bin</title>
 </head>
@@ -37,10 +47,14 @@
     </main>
     <hr>
     <footer>
-      <p>
-        <a href="https://github.com/sunya9/str2bin">str2bin on Github</a>
-        <a href="https://unsweets.net/">© &lt;unsweets/&gt;</a>
-      </p>
+        <ul class="inline clearfix">
+          <li>
+            <a href="https://github.com/sunya9/str2bin">str2bin on Github</a>
+          </li>
+          <li>
+            <a href="https://unsweets.net/">© &lt;unsweets/&gt;</a>
+          </li>
+        </ul>
     </footer>
   </div>
   <script>
