@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
+  <script src="//unpkg.com/vue@2.5.13/dist/vue.js"></script>
+  <title>str2bin</title>
+</head>
+<body>
+  <div id="app" class="container">
+    <header>
+      <h1>str2bin</h1>
+      <h2>二進数で会話</h2>
+    </header>
+    <main>
+      <div class="row">
+        <div class="column">
+          <h3>文字列</h3>
+          <textarea v-model="str"></textarea>
+          <div class="clearfix">
+            <p class="float-right">{{str.length}}</p>
+          </div>
+        </div>
+        <div class="column">
+          <h3>二進数</h3>
+          <textarea v-model="bin"></textarea>
+          <div class="clearfix">
+            <button class="float-left button-primary" @click="tweet">二進数をツイートする</button>
+            <p class="float-right">{{bin.length}}</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <hr>
+    <footer>
+      <p><a href="https://unsweets.net/">© &lt;unsweets/&gt;</a></p>
+    </footer>
+  </div>
+  <script>
+  new Vue({
+    el: '#app',
+    data: {
+      str: '',
+      bin: ''
+    },
+    watch: {
+      str(n, o) {
+        if(n === o) return
+        this.bin = this.str.split('').map(c => c.charCodeAt(0).toString(2).padStart(16, 0)).join('')
+      },
+      bin(n, o) {
+        if(!n || !o || n === o || this.bin.length % 16 !== 0) return
+        this.str = this.bin.match(/\d{16}/g).map(b => parseInt(b, 2)).map(h => String.fromCharCode(h)).join('')
+      }
+    },
+    methods: {
+      tweet() {
+        window.open(`https://twitter.com/share?text=${this.bin}`)
+      }
+    }
+  })
+  </script>
+</body>
+</html>
